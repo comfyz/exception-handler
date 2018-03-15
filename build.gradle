@@ -1,0 +1,72 @@
+buildscript {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    }
+}
+
+def vJavaLang = '1.8'
+def demoProject = project(':demo')
+def javaProjects = [rootProject, demoProject]
+
+configure(javaProjects) {
+    apply plugin: 'java'
+
+    group 'xyz.comfyz'
+    version '1.0.0'
+
+    targetCompatibility = vJavaLang
+    sourceCompatibility = vJavaLang
+
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    repositories {
+        jcenter()
+    }
+}
+
+configure(rootProject) {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'com.jfrog.bintray'
+    apply plugin: 'maven'
+
+    bootRepackage.enabled = false
+
+    bintray {
+        user = project.hasProperty('user') ? project.property('user') : '<user>'
+        key = project.hasProperty('key') ? project.property('key') : '<key>'
+        configurations = ['archives']
+
+        dryRun = false //[Default: false] Whether to run this as dry-run, without deploying
+        publish = true //[Default: false] Whether version should be auto published after an upload
+        override = false //[Default: false] Whether to override version artifacts already published
+        pkg {
+            repo = 'maven'
+            name = project.name
+            userOrg = 'comfy'
+            licenses = ['Apache-2.0']
+            vcsUrl = "https://github.com/comfyz/${project.name}/"
+            version {
+                name = project.version
+            }
+        }
+    }
+
+    dependencies {
+        compile 'org.springframework.boot:spring-boot-starter-web'
+        testCompile 'org.springframework.boot:spring-boot-starter-test'
+    }
+}
+
+configure(demoProject) {
+    apply plugin: 'org.springframework.boot'
+
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+}

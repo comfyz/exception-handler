@@ -1,0 +1,13 @@
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true # 默认false，该设置是为了统一错误处理
+  jackson:
+    serialization:
+        indent-output: true
+server:
+  error:
+    whitelabel:
+      enabled: true
+logging:
+  level:
+    demo: debug
