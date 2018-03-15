@@ -4,7 +4,7 @@ package xyz.comfyz.exceptions.handler;
 public class ErrorMessage {
 
     private String error;
-    private String decs;
+    private String description;
 
     public ErrorMessage() {
     }
@@ -15,22 +15,22 @@ public class ErrorMessage {
 
     public ErrorMessage(String error, String errorDescription) {
         this.error = error;
-        this.decs = errorDescription;
+        this.description = errorDescription;
     }
 
     public String getError() {
         return error;
     }
 
-    public String getDecs() {
-        return decs;
+    public String getDescription() {
+        return description;
     }
 
     public void setError(String error) {
         this.error = error;
     }
 
-    public void setDecs(String decs) {
-        this.decs = decs;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

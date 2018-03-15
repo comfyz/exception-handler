@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,8 +24,13 @@ public class DefaultErrorController implements ErrorController {
         HttpStatus status = getStatus(request);
         ErrorMessage message;
         if (status == HttpStatus.NOT_FOUND) {
-//            getAttribute("javax.servlet.error.request_uri").toString()
-            String desc = "Request uri '" + request.getRequestURI() + "' not found";
+            String url;
+            if (!StringUtils.isEmpty(request.getAttribute("javax.servlet.error.request_uri"))) {
+                url = request.getAttribute("javax.servlet.error.request_uri").toString();
+            } else {
+                url = request.getRequestURI();
+            }
+            String desc = "Request uri '" + url + "' not found";
             message = new ErrorMessage(ErrorCode.NotFound, desc);
         } else if (status == HttpStatus.INTERNAL_SERVER_ERROR) {
             String desc = request.getAttribute("javax.servlet.error.message").toString();
