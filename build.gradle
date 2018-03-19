@@ -16,7 +16,7 @@ def javaProjects = [rootProject, demoProject]
 configure(javaProjects) {
     apply plugin: 'java'
 
-    group 'xyz.comfyz'
+    group 'xyz.comfyz.rest'
     version '1.0.0'
 
     targetCompatibility = vJavaLang
