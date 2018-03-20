@@ -26,7 +26,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import xyz.comfyz.exceptions.exception.*;
 import xyz.comfyz.rest.exceptions.exception.*;
 
 import java.util.List;

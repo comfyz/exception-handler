@@ -8,5 +8,5 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Documented
 @Import({CommonsRestConfiguration.class})
-public @interface EnableCommonsRest {
+public @interface EnableExceptionHandler {
 }

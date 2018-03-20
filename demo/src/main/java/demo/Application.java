@@ -2,11 +2,11 @@ package demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import xyz.comfyz.rest.exceptions.EnableCommonsRest;
+import xyz.comfyz.rest.exceptions.EnableExceptionHandler;
 
 
 @SpringBootApplication
-@EnableCommonsRest
+@EnableExceptionHandler
 public class Application {
 
     public static void main(String... args) {
