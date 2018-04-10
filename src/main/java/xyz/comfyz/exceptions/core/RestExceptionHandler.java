@@ -1,4 +1,4 @@
-package xyz.comfyz.rest.exceptions.handler;
+package xyz.comfyz.exceptions.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import xyz.comfyz.rest.exceptions.exception.*;
+import xyz.comfyz.exceptions.exception.*;
 
 import java.util.List;
 import java.util.Set;

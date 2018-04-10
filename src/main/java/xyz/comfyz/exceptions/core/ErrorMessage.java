@@ -1,4 +1,4 @@
-package xyz.comfyz.rest.exceptions.handler;
+package xyz.comfyz.exceptions.core;
 
 
 import io.swagger.annotations.ApiModel;

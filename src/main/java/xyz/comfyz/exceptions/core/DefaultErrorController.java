@@ -1,4 +1,4 @@
-package xyz.comfyz.rest.exceptions.handler;
+package xyz.comfyz.exceptions.core;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.ErrorController;

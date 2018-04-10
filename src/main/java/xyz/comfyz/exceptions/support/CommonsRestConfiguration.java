@@ -1,6 +1,6 @@
-package xyz.comfyz.rest.exceptions;
+package xyz.comfyz.exceptions.support;
 
-import xyz.comfyz.rest.exceptions.handler.DefaultErrorController;
+import xyz.comfyz.exceptions.core.DefaultErrorController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

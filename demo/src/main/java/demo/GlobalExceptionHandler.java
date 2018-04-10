@@ -1,6 +1,6 @@
 package demo;
 
-import xyz.comfyz.rest.exceptions.handler.RestExceptionHandler;
+import xyz.comfyz.exceptions.core.RestExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 

@@ -1,4 +1,4 @@
-package xyz.comfyz.rest.exceptions.exception;
+package xyz.comfyz.exceptions.exception;
 
 
 public class BadRequestException extends RuntimeException {

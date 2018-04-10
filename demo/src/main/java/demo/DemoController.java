@@ -1,10 +1,10 @@
 package demo;
 
 
-import xyz.comfyz.rest.exceptions.exception.BadRequestException;
-import xyz.comfyz.rest.exceptions.exception.NotFoundException;
-import xyz.comfyz.rest.exceptions.exception.ServerException;
-import xyz.comfyz.rest.exceptions.exception.ServiceUnavailableException;
+import xyz.comfyz.exceptions.exception.BadRequestException;
+import xyz.comfyz.exceptions.exception.NotFoundException;
+import xyz.comfyz.exceptions.exception.ServerException;
+import xyz.comfyz.exceptions.exception.ServiceUnavailableException;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
