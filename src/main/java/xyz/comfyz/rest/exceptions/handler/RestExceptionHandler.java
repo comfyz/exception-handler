@@ -33,6 +33,9 @@ import java.util.Set;
 
 import static org.springframework.http.HttpStatus.*;
 
+/**
+ * 处理@return{@link ResponseEntity}:{@link org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor#handleReturnValue(java.lang.Object, org.springframework.core.MethodParameter, org.springframework.web.method.support.ModelAndViewContainer, org.springframework.web.context.request.NativeWebRequest)}
+ */
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(RestExceptionHandler.class);
@@ -40,7 +43,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleUnhandledException(Exception e) {
         logger.error("Handle Exception", e); // we shall log the error for developer, but hide details from user!
-        ErrorMessage message = new ErrorMessage(INTERNAL_SERVER_ERROR, "Internal server error.");
+        ErrorMessage message = new ErrorMessage(INTERNAL_SERVER_ERROR, e.getMessage());
         return new ResponseEntity<>(message, new HttpHeaders(), INTERNAL_SERVER_ERROR);
     }
 

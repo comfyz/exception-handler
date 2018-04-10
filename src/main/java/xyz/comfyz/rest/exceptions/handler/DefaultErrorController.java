@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStreamWriter;
 
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 @Controller
 @RequestMapping({"${server.error.path:${error.path:/error}}"})
 public class DefaultErrorController implements ErrorController {
@@ -51,7 +54,7 @@ public class DefaultErrorController implements ErrorController {
     private ErrorMessage getMessage(HttpServletRequest request) {
         org.springframework.http.HttpStatus status = getStatus(request);
         ErrorMessage message;
-        if (status == org.springframework.http.HttpStatus.NOT_FOUND) {
+        if (status == NOT_FOUND) {
             String url;
             if (!StringUtils.isEmpty(request.getAttribute("javax.servlet.error.request_uri"))) {
                 url = request.getAttribute("javax.servlet.error.request_uri").toString();
@@ -59,13 +62,17 @@ public class DefaultErrorController implements ErrorController {
                 url = request.getRequestURI();
             }
             String desc = "Request uri '" + url + "' not found";
-            message = new ErrorMessage(org.springframework.http.HttpStatus.NOT_FOUND, desc);
-        } else if (status == org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR) {
+            message = new ErrorMessage(NOT_FOUND, desc);
+        } else if (status == INTERNAL_SERVER_ERROR) {
             String desc = request.getAttribute("javax.servlet.error.message").toString();
-            message = new ErrorMessage(org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR, desc);
+            if (!StringUtils.hasText(desc)) {
+                desc = request.getAttribute("javax.servlet.error.exception").toString();
+                desc = desc.substring(desc.lastIndexOf(":") + 1);
+            }
+            message = new ErrorMessage(INTERNAL_SERVER_ERROR, desc.trim());
         } else {
             String desc = "Unknown error";
-            message = new ErrorMessage(org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR, desc);
+            message = new ErrorMessage(INTERNAL_SERVER_ERROR, desc);
         }
         return message;
     }
@@ -74,12 +81,12 @@ public class DefaultErrorController implements ErrorController {
         Integer statusCode = (Integer) request
                 .getAttribute("javax.servlet.error.status_code");
         if (statusCode == null) {
-            return org.springframework.http.HttpStatus.NOT_FOUND;
+            return NOT_FOUND;
         }
         try {
             return org.springframework.http.HttpStatus.valueOf(statusCode);
         } catch (Exception ex) {
-            return org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+            return INTERNAL_SERVER_ERROR;
         }
     }
 
